@@ -14,6 +14,15 @@ Tested on Windows 7 but I needed to change the console size as the console is bi
 
 I don't know if it works on Linux distros.....chances are it might not compile at all.
 
+### Feature
+You can easily change the height and width of the field.
+
+Just change *FIELD_LENGTH* and *FIELD_BREADTH* in
+```C++
+#define FIELD_LENGTH 10
+#define FIELD_BREADTH 10
+```
+
 ### Installing
 To clone it on your local machine,
 - Clone this repository to your local machine.
