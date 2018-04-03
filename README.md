@@ -18,7 +18,7 @@ I don't know if it works on Linux distros.....chances are it might not compile a
 To clone it on your local machine,
 - Clone this repository to your local machine.
 ```cmd
-https://github.com/OjeshManandhar/Battleship
+git clone https://github.com/OjeshManandhar/Battleship
 ```
 - Go inside the directory where you placed the cloned repo
 - Compile "main.cpp"
