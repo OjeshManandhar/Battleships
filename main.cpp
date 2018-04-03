@@ -978,6 +978,7 @@ void play()
                 {
                     user.clear_ships();
                     user.set_user_ships();
+                    print_detail("All ships placed");
                 }
 
                 for (i = 0; i < 3; i++)
@@ -987,11 +988,10 @@ void play()
             else
             {
                 user.set_user_ships();
+                print_detail("All ships placed");
 
                 flag = 1;
             }
-
-            print_detail("All ships placed");
             break;
         case 2:
             if (flag == 0)
