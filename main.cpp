@@ -1239,8 +1239,11 @@ uint8_t comp_attakcs(BattleField &user, BattleField &comp, uint8_t &turn_switch)
     static char ship_id = '0';
     static char direction = 'N';
     static position_detail pos, hit_pos = {0, 0};
+    static position_detail hit_list[16] = {0};
+    static uint8_t hit_list_size = 0;
 
     bool shunk_status;
+    uint8_t i;
     uint8_t finish = 0;
     uint8_t len = strlen("Please wait while computer attacks") + 2 + 2;
     char ch;
@@ -1289,8 +1292,12 @@ uint8_t comp_attakcs(BattleField &user, BattleField &comp, uint8_t &turn_switch)
             user.set_data(pos, '*');
             hit = true;
             direction = 'N';
+
             ship_id = ch;
             hit_pos = pos;
+
+            hit_list_size++;
+            hit_list[hit_list_size - 1] = pos;
 
             user.display_message(attacked);
         }
@@ -1332,6 +1339,10 @@ uint8_t comp_attakcs(BattleField &user, BattleField &comp, uint8_t &turn_switch)
             {
                 status = hits;
                 user.set_data(pos, '*');
+
+                hit_list_size++;
+                hit_list[hit_list_size - 1] = pos;
+
                 shunk_status = user.check_ship_status(ship_id - '0' - 1);
                 if (shunk_status == true)
                 {
@@ -1346,6 +1357,22 @@ uint8_t comp_attakcs(BattleField &user, BattleField &comp, uint8_t &turn_switch)
 
                         return finish;
                     }
+
+                    for (i = 0; i < hit_list_size; i++)
+                        if ((hit_list[i].row != 99) && (hit_list[i].col != 99))
+                            if (user.return_data(hit_list[i]) == '#')
+                            {
+                                hit_list[i].row = 99;
+                                hit_list[i].col = 99;
+                            }
+                    for (i = 0; i < hit_list_size; i++)
+                        if ((hit_list[i].row != 99) && (hit_list[i].col != 99))
+                        {
+                            hit_pos = hit_list[i];
+                            hit = true;
+                            ship_id = user.return_data(hit_pos) - 16;
+                            break;
+                        }
 
                     user.display_message(shinked);
                     return finish;
@@ -1520,6 +1547,10 @@ uint8_t comp_attakcs(BattleField &user, BattleField &comp, uint8_t &turn_switch)
             if (status == hits)
             {
                 user.set_data(pos, '*');
+
+                hit_list_size++;
+                hit_list[hit_list_size - 1] = pos;
+
                 shunk_status = user.check_ship_status(ship_id - '0' - 1);
                 if (shunk_status == true)
                 {
@@ -1533,6 +1564,22 @@ uint8_t comp_attakcs(BattleField &user, BattleField &comp, uint8_t &turn_switch)
 
                         return finish;
                     }
+
+                    for (i = 0; i < hit_list_size; i++)
+                        if ((hit_list[i].row != 99) && (hit_list[i].col != 99))
+                            if (user.return_data(hit_list[i]) == '#')
+                            {
+                                hit_list[i].row = 99;
+                                hit_list[i].col = 99;
+                            }
+                    for (i = 0; i < hit_list_size; i++)
+                        if ((hit_list[i].row != 99) && (hit_list[i].col != 99))
+                        {
+                            hit_pos = hit_list[i];
+                            hit = true;
+                            ship_id = user.return_data(hit_pos) - 16;
+                            break;
+                        }
 
                     user.display_message(shinked);
                     break;
