@@ -949,7 +949,7 @@ void play()
 
     strcpy(menu_items[0], "Options");
     strcpy(menu_items[1], "Place Ships");
-    strcpy(menu_items[2], "View Ships");
+    strcpy(menu_items[2], "View Field");
     strcpy(menu_items[3], "Battle");
     strcpy(menu_items[4], "Back");
 
@@ -994,11 +994,6 @@ void play()
             }
             break;
         case 2:
-            if (flag == 0)
-            {
-                print_detail("You haven't place your ships yet");
-                break;
-            }
             user.show_field(1);
             (void)getkey();
             break;
